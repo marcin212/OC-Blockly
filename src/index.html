@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title> OC Robot - Blockly</title>
+    <script src="js/lib/blockly_compressed.js"></script>
+    <script src="js/lib/blocks_compressed.js"></script>
+    <script src="js/lib/lua_compressed.js"></script>
+    <script src="js/move-blocks.js"></script>
+    <script src="js/msg/en.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+</head>
+<body>
+
+<xml id="toolbox" style="display: none">
+    <block type="controls_if"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="logic_compare"></block>
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+    <block type="text"></block>
+    <block type="text_print"></block>
+</xml>
+
+
+
+<div id="blocklyDiv"></div>
+
+
+
+<script>
+    var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+    function myUpdateFunction(event) {
+        var code = Blockly.Lua.workspaceToCode(workspace);
+        document.getElementById('codeArea').value = code;
+    }
+    workspace.addChangeListener(myUpdateFunction);
+</script>
+</body>
+</html>
