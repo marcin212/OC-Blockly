@@ -294,7 +294,7 @@
     var editor = ace.edit("editorDiv");
     editor.setTheme("ace/theme/ambiance");
     editor.getSession().setMode("ace/mode/lua");
-
+    editor.$blockScrolling = Infinity;
     var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
     function myUpdateFunction(event) {
         var code = Blockly.Lua.workspaceToCode(workspace);
