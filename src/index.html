@@ -1,12 +1,14 @@
 <html>
 <head>
     <title> OC Robot - Blockly</title>
-    <script src="js/lib/blockly_compressed.js"></script>
-    <script src="js/lib/blocks_compressed.js"></script>
-    <script src="js/lib/lua_compressed.js"></script>
-    <script src="js/move-blocks.js"></script>
-    <script src="js/msg/en.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="js/lib/blockly_compressed.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/blocks_compressed.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/lua_compressed.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/move-blocks.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/msg/en.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 
@@ -21,16 +23,19 @@
 </xml>
 
 
-
 <div id="blocklyDiv"></div>
+<div id="editorDiv"></div>
 
-
-
+<script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    var editor = ace.edit("editorDiv");
+    editor.setTheme("ace/theme/ambiance");
+    editor.getSession().setMode("ace/mode/lua");
+
     var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
     function myUpdateFunction(event) {
         var code = Blockly.Lua.workspaceToCode(workspace);
-        document.getElementById('codeArea').value = code;
+        editor.setValue(code);
     }
     workspace.addChangeListener(myUpdateFunction);
 </script>
