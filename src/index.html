@@ -14,6 +14,7 @@
     <script src="js/sides-blocks.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/inv-blocks.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/stack-blocks.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/geolyzer-block.js" type="text/javascript" charset="utf-8"></script>
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -289,6 +290,7 @@
     <category id="catRobotSides" colour="240" custom="ROBOT_SIDES" name="Sides"></category>
     <category id="catRobotInventory" colour="240" custom="ROBOT_INVENTORY" name="Inventory"></category>
     <category id="catRobotStack" colour="240" custom="ROBOT_STACK" name="ItemStack"></category>
+    <category id="catGeolyzer" colour="240" custom="GEOLYZER" name="Geolyzer"></category>
 </xml>
 
 <div class="toolbar">
@@ -336,6 +338,7 @@
     workspace.registerToolboxCategoryCallback('ROBOT_SIDES', robot_sides.toolboxCategory);
     workspace.registerToolboxCategoryCallback('ROBOT_INVENTORY', robot_inventory.toolboxCategory);
     workspace.registerToolboxCategoryCallback('ROBOT_STACK', robot_stack.toolboxCategory);
+    workspace.registerToolboxCategoryCallback('GEOLYZER', geolyzer.toolboxCategory);
     document.addEventListener("DOMContentLoaded", function (event) {
         if (window.location.hash != "" && window.location.hash != "#") {
             load();
