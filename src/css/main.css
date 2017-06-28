@@ -1,9 +1,14 @@
-#blocklyDiv{
-    width: 50%;
+#blocklyDiv {
+    width: 75%;
     height: 100%;
     float: left;
 }
-#editorDiv{
-    width: 50%;
+
+#editorDiv {
+    width: 25%;
     height: 100%;
+}
+
+.toolbar {
+    font-size: 20px;
 }
