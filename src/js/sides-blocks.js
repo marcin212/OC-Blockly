@@ -8,8 +8,6 @@ robot_sides.toolboxCategory = function (workspace) {
         if (block) {
             var block = Blockly.Xml.textToDom(robot_sides.blockAsText[blockName]).firstChild;
             xmlList.push(block);
-            console.log(blockName)
-            console.log(block)
         }
     });
     return xmlList;

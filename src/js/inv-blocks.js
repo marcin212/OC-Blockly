@@ -8,8 +8,6 @@ robot_inventory.toolboxCategory = function (workspace) {
         if (block) {
             var block = Blockly.Xml.textToDom(robot_inventory.blockAsText[blockName]).firstChild;
             xmlList.push(block);
-            console.log(blockName)
-            console.log(block)
         }
     });
     return xmlList;
