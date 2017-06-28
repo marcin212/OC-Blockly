@@ -136,6 +136,55 @@ robot_inventory.blockList.push('robot_suck_inv');
 robot_inventory.blockAsText['robot_suck_inv'] = '<xml><block type="robot_suck_inv"></block></xml>';
 
 //END SUCK FROM SLOT
+
+//GET SLOT STACK SIZE
+Blockly.Blocks['robot_stack_size_inv'] = {
+    init: function() {
+        this.appendValueInput('SLOT').setCheck('Number').appendField("gets number of items in slot");
+        this.appendValueInput('SIDE').setCheck('Side').appendField("in inventory on");
+        this.setInputsInline(true);
+        this.setOutput(true, 'Number');
+        this.setColour(212);
+        this.setTooltip('Gets number of items in specified slot in inventory on the specified side.');
+        this.setHelpUrl('http://ocdoc.cil.li/component:inventory_controller');
+    }
+};
+
+Blockly.Lua['robot_stack_size_inv'] = function(block) {
+    var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
+    var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
+    return ['component.inventory_controller.getSlotStackSize('+side +',' + slot +')', Blockly.Lua.ORDER_MEMBER];
+};
+
+robot_inventory.blockList.push('robot_stack_size_inv');
+robot_inventory.blockAsText['robot_stack_size_inv'] = '<xml><block type="robot_stack_size_inv"></block></xml>';
+//END GET SLOT STACK SIZE
+
+//GET GET SLOT MAX STACK SIZE
+Blockly.Blocks['robot_stack_maxsize_inv'] = {
+    init: function() {
+        this.appendValueInput('SLOT').setCheck('Number').appendField("gets maximum number of items in slot");
+        this.appendValueInput('SIDE').setCheck('Side').appendField("in inventory on");
+        this.setInputsInline(true);
+        this.setOutput(true, 'Number');
+        this.setColour(212);
+        this.setTooltip('Gets maximum number of items in specified slot in inventory on the specified side.');
+        this.setHelpUrl('http://ocdoc.cil.li/component:inventory_controller');
+    }
+};
+
+Blockly.Lua['robot_stack_maxsize_inv'] = function(block) {
+    var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
+    var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
+    return ['component.inventory_controller.getSlotStackSize('+side +',' + slot +')', Blockly.Lua.ORDER_MEMBER];
+};
+
+robot_inventory.blockList.push('robot_stack_maxsize_inv');
+robot_inventory.blockAsText['robot_stack_maxsize_inv'] = '<xml><block type="robot_stack_maxsize_inv"></block></xml>';
+//END GET SLOT MAX STACK SIZE
+
+
+
 /*
 
  equip():boolean
@@ -150,11 +199,5 @@ robot_inventory.blockAsText['robot_suck_inv'] = '<xml><block type="robot_suck_in
  Compare Itemstack description in specified slot with one in specified slot of a database with specified address. Returns true if items match.
  compareStacks(side:number, slotA:number, slotB:number):boolean
  Checks to see if Itemstack descriptions in specified slotA and slotB of inventory on specified side match. Returns true if identical.
- getSlotMaxStackSize(side:number, slot:number):number
- Gets maximum number of items in specified slot in inventory on the specified side.
- getSlotStackSize(side:number, slot:number):number
- Gets number of items in specified slot in inventory on the specified side.
-
-
  */
 
