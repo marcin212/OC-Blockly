@@ -1,4 +1,4 @@
-var pastebin = {
+var gist = {
     add: function (text) {
 
         var request = {
