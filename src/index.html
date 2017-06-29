@@ -9,6 +9,7 @@
 
     <script src="js/lib/lz-string.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/lib/gist.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/splitter.js" type="text/javascript" charset="utf-8"></script>
 
     <script src="js/move-blocks.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/sides-blocks.js" type="text/javascript" charset="utf-8"></script>
@@ -17,7 +18,9 @@
     <script src="js/geolyzer-block.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/system-blocks.js" type="text/javascript" charset="utf-8"></script>
 
+
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/splitter.css">
 </head>
 <body>
 
@@ -310,9 +313,13 @@
     </div>
 
 </div>
-<div class="content">
-    <div id="blocklyDiv"></div>
-    <div id="editorDiv"></div>
+<div class="content vertically_divided">
+    <div id="blocklyArea">
+        <div id="blocklyDiv"></div>
+    </div>
+    <div id="editorArea">
+        <div id="editorDiv"></div>
+    </div>
 </div>
 <script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -320,7 +327,36 @@
     editor.setTheme("ace/theme/ambiance");
     editor.getSession().setMode("ace/mode/lua");
     editor.$blockScrolling = Infinity;
-    var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+    //var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+
+    //
+
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var workspace = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
+    var onresize = function (e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x + 'px';
+        blocklyDiv.style.top = y + 'px';
+        blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+        Blockly.svgResize(workspace);
+    };
+    splitMe.updateListeners.push(onresize);
+
+    onresize();
+    ///
+
+
     var header = 'local robot = require("robot")\n' +
         'local computer = require("computer")\n' +
         'local sides = require("sides")\n' +
@@ -391,5 +427,6 @@
     });
 
 </script>
+
 </body>
 </html>
