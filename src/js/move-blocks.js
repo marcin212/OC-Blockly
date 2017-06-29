@@ -24,7 +24,7 @@ function move(dir, beep, msg, sleep) {
         code += '\tprint(' + msg + ')\n';
     }
     if (beep == 'TRUE') {
-        code += '\tcomputer.beep(1000, 0.5)\n';
+        code += '\tcomponent.computer.beep(1000, 0.5)\n';
     }
     code += '\tos.sleep(' + sleep + ')\nend\n';
     return code
