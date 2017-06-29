@@ -306,7 +306,7 @@
     <button onclick="loadFromCode()">Load</button>
     <div class="right">
         <span>created by <a href="https://bymarcin.com">marcin212</a></span>
-        <span> | version: alpha-0.2</span>
+        <span> | version: alpha-0.3</span>
     </div>
 
 </div>
@@ -338,12 +338,19 @@
     }
 
     function save() {
-        var xml = Blockly.Xml.workspaceToDom(workspace);
-        var xml_text = Blockly.Xml.domToText(xml);
-        var compressed = LZString.compressToBase64(xml_text);
-        var id = gist.add(compressed);
-        alert("saved as:" + id);
-        window.location.hash = '#' + id;
+        showLoading(true);
+        try {
+            var xml = Blockly.Xml.workspaceToDom(workspace);
+            var xml_text = Blockly.Xml.domToText(xml);
+            var compressed = LZString.compressToBase64(xml_text);
+            var id = gist.add(compressed);
+            alert("saved as:" + id);
+            window.location.hash = '#' + id;
+        }
+        catch (err) {
+            alert("Error during saving data.")
+        }
+        showLoading(false);
     }
 
     function load() {
