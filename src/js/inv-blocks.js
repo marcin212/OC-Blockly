@@ -182,6 +182,46 @@ robot_inventory.blockAsText['robot_stack_maxsize_inv'] = '<xml><block type="robo
 //END GET SLOT MAX STACK SIZE
 
 
+// INTERNAL INVENTORY SIZE
+Blockly.Blocks['robot_internal_inv_size'] = {
+    init: function() {
+        this.appendDummyInput().appendField("size of internal robot inventory");
+        this.setInputsInline(true);
+        this.setOutput(true, 'Number');
+        this.setColour(212);
+        this.setTooltip('Returns the amount of select-able internal robot inventory slots.');
+        this.setHelpUrl('http://ocdoc.cil.li/api:robot');
+    }
+};
+
+Blockly.Lua['robot_internal_inv_size'] = function(block) {
+    return ['robot.inventorySize()', Blockly.Lua.ORDER_MEMBER];
+};
+
+robot_inventory.blockList.push('robot_internal_inv_size');
+robot_inventory.blockAsText['robot_internal_inv_size'] = '<xml><block type="robot_internal_inv_size"></block></xml>';
+//  END INTERNAL INVENTORY SIZE
+
+// SELECT INTERNAL SLOT
+Blockly.Blocks['robot_select_internal_slot'] = {
+    init: function() {
+        this.appendValueInput('SLOT').setCheck('Number').appendField("select internal slot");
+        this.setInputsInline(true);
+        this.setOutput(true, 'Number');
+        this.setColour(212);
+        this.setTooltip('Selects the given inventory slot (if specified) and returns the current inventory slot.');
+        this.setHelpUrl('http://ocdoc.cil.li/api:robot');
+    }
+};
+
+Blockly.Lua['robot_select_internal_slot'] = function(block) {
+    var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
+    return ['robot.select('+ slot +')', Blockly.Lua.ORDER_MEMBER];
+};
+
+robot_inventory.blockList.push('robot_select_internal_slot');
+robot_inventory.blockAsText['robot_select_internal_slot'] = '<xml><block type="robot_select_internal_slot"></block></xml>';
+//  END SELECT INTERNAL SLOT
 
 /*
 
