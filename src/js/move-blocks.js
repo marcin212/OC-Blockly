@@ -18,21 +18,21 @@ robot_move.toolboxCategory = function (workspace) {
 
 // MOVE
 
-function move(dir, beep, msg, sleep){
+function move(dir, beep, msg, sleep) {
     var code = 'while not robot.' + dir + '() do\n';
-        if(msg!=''){
-            code += '\tprint(' + msg +')\n';
-        }
-        if(beep=='TRUE'){
-            code += '\tcomputer.beep(1000, 0.5)\n';
-        }
-        code += '\tos.sleep(' + sleep + ')\nend\n';
+    if (msg != '') {
+        code += '\tprint(' + msg + ')\n';
+    }
+    if (beep == 'TRUE') {
+        code += '\tcomputer.beep(1000, 0.5)\n';
+    }
+    code += '\tos.sleep(' + sleep + ')\nend\n';
     return code
 }
 
 
 Blockly.Blocks['robot_move'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput().appendField('move')
             .appendField(new Blockly.FieldDropdown([
                     ['forward', 'forward'],
@@ -50,16 +50,22 @@ Blockly.Blocks['robot_move'] = {
     }
 };
 
-Blockly.Lua['robot_move'] = function(block) {
+Blockly.Lua['robot_move'] = function (block) {
     var DIR = block.getFieldValue('DIR');
     var BEEP = block.getFieldValue('BEEP');
     var MSG = Blockly.Lua.valueToCode(block, 'MSG', Blockly.Lua.ORDER_NONE);
     var SLEEP = Blockly.Lua.valueToCode(block, 'SLEEP', Blockly.Lua.ORDER_NONE);
-    return move(DIR,BEEP,MSG,SLEEP);
+    return move(DIR, BEEP, MSG, SLEEP);
 };
 
 robot_move.blockList.push('robot_move');
-robot_move.blockAsText['robot_move'] = '<xml><block type="robot_move"></block></xml>';
+robot_move.blockAsText['robot_move'] = '<xml><block type="robot_move">' +
+    '<value name="SLEEP">' +
+    '<shadow type="math_number">' +
+    '<field name="NUM">1</field>' +
+    '</shadow>' +
+    '</value>' +
+    '</block></xml>';
 
 // END MOVE
 
@@ -68,21 +74,21 @@ robot_move.blockAsText['robot_move'] = '<xml><block type="robot_move"></block></
 
 
 Blockly.Blocks['robot_turn'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput().appendField('turn')
             .appendField(new Blockly.FieldDropdown([
-                   ['left', 'turnLeft'],
-                   ['right', 'turnRight'],
-                   ['around', 'turnAround']
-               ]),
-               'DIR');
+                    ['left', 'turnLeft'],
+                    ['right', 'turnRight'],
+                    ['around', 'turnAround']
+                ]),
+                'DIR');
         this.setColour(125);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     }
 };
 
-Blockly.Lua['robot_turn'] = function(block) {
+Blockly.Lua['robot_turn'] = function (block) {
     return 'robot.' + block.getFieldValue('DIR') + '()\n';
 };
 
