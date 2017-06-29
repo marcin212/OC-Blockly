@@ -15,24 +15,24 @@ robot_sides.toolboxCategory = function (workspace) {
 
 //BLOCK SIDE
 Blockly.Blocks['robot_sides'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput()
             .appendField('side:')
             .appendField(new Blockly.FieldDropdown([
-                ['front', 'sides.front'],
-                ['back', 'sides.back'],
-                ['left', 'sides.left'],
-                ['right', 'sides.right'],
-                ['down', 'sides.down'],
-                ['up', 'sides.up']
-            ]),
-            'SIDE');
+                    ['front', 'sides.front'],
+                    ['back', 'sides.back'],
+                    ['left', 'sides.left'],
+                    ['right', 'sides.right'],
+                    ['down', 'sides.down'],
+                    ['up', 'sides.up']
+                ]),
+                'SIDE');
         this.setOutput(true, 'Side');
         this.setColour(125);
     }
 };
 
-Blockly.Lua['robot_sides'] = function(block) {
+Blockly.Lua['robot_sides'] = function (block) {
     return [block.getFieldValue('SIDE'), Blockly.Lua.ORDER_MEMBER];
 };
 

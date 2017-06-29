@@ -16,7 +16,7 @@ geolyzer.toolboxCategory = function (workspace) {
 
 // ANALYZE
 Blockly.Blocks['geolyzer_analyze'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('SIDE').setCheck('Side').appendField("analyze on");
         this.setInputsInline(true);
         this.setOutput(true, 'String');
@@ -27,9 +27,9 @@ Blockly.Blocks['geolyzer_analyze'] = {
     }
 };
 
-Blockly.Lua['geolyzer_analyze'] = function(block) {
+Blockly.Lua['geolyzer_analyze'] = function (block) {
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.getInventorySize('+ side + ')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.getInventorySize(' + side + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 geolyzer.blockList.push('geolyzer_analyze');

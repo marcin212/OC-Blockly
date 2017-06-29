@@ -106,8 +106,8 @@ Blockly.Lua['robot_stack_cmp'] = function (block) {
     }
 
     var code = '(' + stack1 + '~=nil and ' + stack2 + '~=nil';
-    if(cmp.length>0){
-        code+= ' and '
+    if (cmp.length > 0) {
+        code += ' and '
     }
     for (var i = 0; i < cmp.length; i++) {
         code += cmp[i];
@@ -149,7 +149,7 @@ Blockly.Lua['robot_stack_create'] = function (block) {
     var DAMAGE = Blockly.Lua.valueToCode(block, 'DAMAGE', Blockly.Lua.ORDER_NONE);
     var LABEL = Blockly.Lua.valueToCode(block, 'LABEL', Blockly.Lua.ORDER_NONE);
     var SIZE = Blockly.Lua.valueToCode(block, 'SIZE', Blockly.Lua.ORDER_NONE);
-    var code = '{["name"] = '+ (NAME==''?'nil':NAME) +', ["damage"] = '+ (DAMAGE==''?'nil':DAMAGE) +', ["label"] = '+ (LABEL==''?'nil':LABEL) +', ["size"] = '+ (SIZE==''?'nil':SIZE) +'}';
+    var code = '{["name"] = ' + (NAME == '' ? 'nil' : NAME) + ', ["damage"] = ' + (DAMAGE == '' ? 'nil' : DAMAGE) + ', ["label"] = ' + (LABEL == '' ? 'nil' : LABEL) + ', ["size"] = ' + (SIZE == '' ? 'nil' : SIZE) + '}';
     return [code, Blockly.Lua.ORDER_MEMBER];
 };
 

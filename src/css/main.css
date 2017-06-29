@@ -2,10 +2,9 @@
     height: 100%;
 }
 
-#blocklyDiv{
+#blocklyDiv {
     position: absolute;
 }
-
 
 .toolbar {
     font-size: 20px;

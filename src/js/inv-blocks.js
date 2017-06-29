@@ -16,7 +16,7 @@ robot_inventory.toolboxCategory = function (workspace) {
 
 // INVENTORY SIZE
 Blockly.Blocks['robot_inv_size'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('SIDE').setCheck('Side').appendField("size of the inventory on");
         this.setInputsInline(true);
         this.setOutput(true, 'Number');
@@ -27,9 +27,9 @@ Blockly.Blocks['robot_inv_size'] = {
     }
 };
 
-Blockly.Lua['robot_inv_size'] = function(block) {
+Blockly.Lua['robot_inv_size'] = function (block) {
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.getInventorySize('+ side + ')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.getInventorySize(' + side + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_inv_size');
@@ -38,7 +38,7 @@ robot_inventory.blockAsText['robot_inv_size'] = '<xml><block type="robot_inv_siz
 
 // GET STACK IN SLOT
 Blockly.Blocks['robot_inv'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('SIDE').setCheck('Side').appendField("stack from inventory on");
         this.appendValueInput('SLOT').setCheck('Number').appendField("from slot: ");
         this.setInputsInline(true);
@@ -49,10 +49,10 @@ Blockly.Blocks['robot_inv'] = {
     }
 };
 
-Blockly.Lua['robot_inv'] = function(block) {
+Blockly.Lua['robot_inv'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.getStackInSlot('+ side + ',' + slot +')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.getStackInSlot(' + side + ',' + slot + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_inv');
@@ -61,7 +61,7 @@ robot_inventory.blockAsText['robot_inv'] = '<xml><block type="robot_inv"></block
 
 // GET STACK IN INTERNAL SLOT
 Blockly.Blocks['robot_internal_inv'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('SLOT').setCheck('Number').appendField("stack from internal inventory form slot");
         this.setInputsInline(true);
         this.setOutput(true, 'Stack');
@@ -71,9 +71,9 @@ Blockly.Blocks['robot_internal_inv'] = {
     }
 };
 
-Blockly.Lua['robot_internal_inv'] = function(block) {
+Blockly.Lua['robot_internal_inv'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.getStackInInternalSlot(' + slot +')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.getStackInInternalSlot(' + slot + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_internal_inv');
@@ -83,7 +83,7 @@ robot_inventory.blockAsText['robot_internal_inv'] = '<xml><block type="robot_int
 
 //DROP INTO SLOT
 Blockly.Blocks['robot_drop_inv'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('COUNT').setCheck('Number').appendField("drop at least");
         this.appendValueInput('SIDE').setCheck('Side').appendField("items into inventory on");
         this.appendValueInput('SLOT').setCheck('Number').appendField("to slot ");
@@ -96,11 +96,11 @@ Blockly.Blocks['robot_drop_inv'] = {
     }
 };
 
-Blockly.Lua['robot_drop_inv'] = function(block) {
+Blockly.Lua['robot_drop_inv'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
     var count = Blockly.Lua.valueToCode(block, 'COUNT', Blockly.Lua.ORDER_NONE);
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.dropIntoSlot(' + side + ',' + slot + ',' + count +')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.dropIntoSlot(' + side + ',' + slot + ',' + count + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_drop_inv');
@@ -110,7 +110,7 @@ robot_inventory.blockAsText['robot_drop_inv'] = '<xml><block type="robot_drop_in
 
 //SUCK FROM SLOT
 Blockly.Blocks['robot_suck_inv'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('COUNT').setCheck('Number').appendField("takes up to");
         this.appendValueInput('SIDE').setCheck('Side').appendField("items from inventory on");
         this.appendValueInput('SLOT').setCheck('Number').appendField("from slot ");
@@ -123,11 +123,11 @@ Blockly.Blocks['robot_suck_inv'] = {
     }
 };
 
-Blockly.Lua['robot_suck_inv'] = function(block) {
+Blockly.Lua['robot_suck_inv'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
     var count = Blockly.Lua.valueToCode(block, 'COUNT', Blockly.Lua.ORDER_NONE);
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.suckFromSlot(' + side + ',' + slot + ',' + count +')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.suckFromSlot(' + side + ',' + slot + ',' + count + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_suck_inv');
@@ -137,7 +137,7 @@ robot_inventory.blockAsText['robot_suck_inv'] = '<xml><block type="robot_suck_in
 
 //GET SLOT STACK SIZE
 Blockly.Blocks['robot_stack_size_inv'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('SLOT').setCheck('Number').appendField("gets number of items in slot");
         this.appendValueInput('SIDE').setCheck('Side').appendField("in inventory on");
         this.setInputsInline(true);
@@ -148,10 +148,10 @@ Blockly.Blocks['robot_stack_size_inv'] = {
     }
 };
 
-Blockly.Lua['robot_stack_size_inv'] = function(block) {
+Blockly.Lua['robot_stack_size_inv'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.getSlotStackSize('+side +',' + slot +')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.getSlotStackSize(' + side + ',' + slot + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_stack_size_inv');
@@ -160,7 +160,7 @@ robot_inventory.blockAsText['robot_stack_size_inv'] = '<xml><block type="robot_s
 
 //GET GET SLOT MAX STACK SIZE
 Blockly.Blocks['robot_stack_maxsize_inv'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('SLOT').setCheck('Number').appendField("gets maximum number of items in slot");
         this.appendValueInput('SIDE').setCheck('Side').appendField("in inventory on");
         this.setInputsInline(true);
@@ -171,10 +171,10 @@ Blockly.Blocks['robot_stack_maxsize_inv'] = {
     }
 };
 
-Blockly.Lua['robot_stack_maxsize_inv'] = function(block) {
+Blockly.Lua['robot_stack_maxsize_inv'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.getSlotStackSize('+side +',' + slot +')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.inventory_controller.getSlotStackSize(' + side + ',' + slot + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_stack_maxsize_inv');
@@ -184,7 +184,7 @@ robot_inventory.blockAsText['robot_stack_maxsize_inv'] = '<xml><block type="robo
 
 // INTERNAL INVENTORY SIZE
 Blockly.Blocks['robot_internal_inv_size'] = {
-    init: function() {
+    init: function () {
         this.appendDummyInput().appendField("size of internal robot inventory");
         this.setInputsInline(true);
         this.setOutput(true, 'Number');
@@ -194,7 +194,7 @@ Blockly.Blocks['robot_internal_inv_size'] = {
     }
 };
 
-Blockly.Lua['robot_internal_inv_size'] = function(block) {
+Blockly.Lua['robot_internal_inv_size'] = function (block) {
     return ['robot.inventorySize()', Blockly.Lua.ORDER_MEMBER];
 };
 
@@ -204,7 +204,7 @@ robot_inventory.blockAsText['robot_internal_inv_size'] = '<xml><block type="robo
 
 // SELECT INTERNAL SLOT
 Blockly.Blocks['robot_select_internal_slot'] = {
-    init: function() {
+    init: function () {
         this.appendValueInput('SLOT').setCheck('Number').appendField("select internal slot");
         this.setInputsInline(true);
         this.setOutput(true, 'Number');
@@ -214,9 +214,9 @@ Blockly.Blocks['robot_select_internal_slot'] = {
     }
 };
 
-Blockly.Lua['robot_select_internal_slot'] = function(block) {
+Blockly.Lua['robot_select_internal_slot'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'SLOT', Blockly.Lua.ORDER_NONE);
-    return ['robot.select('+ slot +')', Blockly.Lua.ORDER_MEMBER];
+    return ['robot.select(' + slot + ')', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_inventory.blockList.push('robot_select_internal_slot');
