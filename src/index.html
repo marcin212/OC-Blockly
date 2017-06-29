@@ -19,6 +19,10 @@
 </head>
 <body>
 
+<div class="loader hidden">
+    <img src="img/loader.gif" class="loader-gif">
+</div>
+
 <xml id="toolbox" style="display: none">
 
     <category id="catLogic" colour="210" name="Logic">
@@ -294,7 +298,7 @@
 <div class="toolbar">
     <span>OC-Blockly |</span>
     <button onclick="save()">Save</button>
-    <button onclick="load()">Load</button>
+    <button onclick="loadFromCode()">Load</button>
 </div>
 <div class="content">
     <div id="blocklyDiv"></div>
@@ -311,6 +315,16 @@
         'local computer = require("computer")\n' +
         '\n';
 
+    function showLoading(bool) {
+        if (!bool) {
+            document.getElementsByClassName("loader")[0].classList.add("hidden");
+            document.getElementsByClassName("loader-gif")[0].classList.add("hidden");
+        } else {
+            document.getElementsByClassName("loader")[0].classList.remove("hidden");
+            document.getElementsByClassName("loader-gif")[0].classList.remove("hidden");
+        }
+    }
+
     function save() {
         var xml = Blockly.Xml.workspaceToDom(workspace);
         var xml_text = Blockly.Xml.domToText(xml);
@@ -321,10 +335,23 @@
     }
 
     function load() {
-        var compressed = gist.get(window.location.hash.substring(1));
-        var decompressed = LZString.decompressFromBase64(compressed);
-        var xml = Blockly.Xml.textToDom(decompressed);
-        Blockly.Xml.domToWorkspace(xml, workspace);
+        showLoading(true);
+        try {
+            var compressed = gist.get(window.location.hash.substring(1));
+            var decompressed = LZString.decompressFromBase64(compressed);
+            var xml = Blockly.Xml.textToDom(decompressed);
+            Blockly.Xml.domToWorkspace(xml, workspace);
+        }
+        catch (err) {
+            alert("Error during loading data.")
+        }
+        showLoading(false);
+    }
+
+    function loadFromCode() {
+        var code = prompt("Code: ", "");
+        window.location.hash = '#' + code;
+        load();
     }
 
     function myUpdateFunction(event) {
