@@ -59,7 +59,7 @@ Blockly.Blocks['robot_stack_empty'] = {
 
 Blockly.Lua['robot_stack_empty'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'STACK', Blockly.Lua.ORDER_NONE);
-    return [slot + '~=nil', Blockly.Lua.ORDER_MEMBER];
+    return ['(' + slot + ' == nil)', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_stack.blockList.push('robot_stack_empty');
