@@ -62,6 +62,7 @@ var splitMe = {
             splitMe.currentElement.splitter.className = splitMe.currentElement.vertical ? 'divider_vertical' : 'divider_horizontal';
             splitMe.currentElement = null;
         }
+        splitMe.updateListeners.forEach( function (e){ e() });
     },
     move:function(event){
         if(splitMe.currentElement){
@@ -96,7 +97,7 @@ var splitMe = {
             element.b.css({top:bp,bottom:0, left:0, right:0});
             element.a.css({bottom:ap,top:0, left:0, right:0});
         }
-        splitMe.updateListeners.forEach( function (e){ e() });
+
     },
     init : function(){
         splitMe.resizes=NodeListAsArray(document.querySelectorAll('.vertically_divided')).
@@ -140,6 +141,7 @@ var splitMe = {
             elem.splitter = divider;
             elem.appendChild(divider);
             splitMe.update(elem);
+            splitMe.updateListeners.forEach( function (e){ e() });
 
         })
 
