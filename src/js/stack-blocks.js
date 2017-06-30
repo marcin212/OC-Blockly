@@ -34,7 +34,7 @@ Object.keys(fields).forEach(function (field) {
 
     Blockly.Lua['robot_stack_' + field] = function (block) {
         var slot = Blockly.Lua.valueToCode(block, 'STACK', Blockly.Lua.ORDER_NONE);
-        return [slot + '[\'' + field + '\']', Blockly.Lua.ORDER_MEMBER];
+        return ['((' + slot + ' or {})[\'' + field + '\'] or '+ ((fields[field]=='Number')?-1:"''") +' )', Blockly.Lua.ORDER_MEMBER];
     };
 
     robot_stack.blockList.push('robot_stack_' + field);
@@ -59,7 +59,7 @@ Blockly.Blocks['robot_stack_empty'] = {
 
 Blockly.Lua['robot_stack_empty'] = function (block) {
     var slot = Blockly.Lua.valueToCode(block, 'STACK', Blockly.Lua.ORDER_NONE);
-    return [slot + '~=nil', Blockly.Lua.ORDER_MEMBER];
+    return ['(' + slot + ' == nil)', Blockly.Lua.ORDER_MEMBER];
 };
 
 robot_stack.blockList.push('robot_stack_empty');

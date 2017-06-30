@@ -29,7 +29,7 @@ Blockly.Blocks['geolyzer_analyze'] = {
 
 Blockly.Lua['geolyzer_analyze'] = function (block) {
     var side = Blockly.Lua.valueToCode(block, 'SIDE', Blockly.Lua.ORDER_NONE);
-    return ['component.inventory_controller.getInventorySize(' + side + ')', Blockly.Lua.ORDER_MEMBER];
+    return ['component.geolyzer.analyze(' + side + ').name', Blockly.Lua.ORDER_MEMBER];
 };
 
 geolyzer.blockList.push('geolyzer_analyze');

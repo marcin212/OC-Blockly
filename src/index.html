@@ -309,9 +309,8 @@
         <button onclick="loadFromCode()">Load</button>
         <div class="right">
             <span>created by <a href="https://bymarcin.com">marcin212</a></span>
-            <span> | version: alpha-0.5</span>
+            <span> | version: alpha-0.6 | <a href="https://github.com/marcin212/OC-Blockly/issues">ISSUES</a> </span>
         </div>
-
     </div>
     <div class="content">
         <div class="vertically_divided">
@@ -342,10 +341,10 @@
         var element = blocklyArea;
         var x = 0;
         var y = 0;
-       // do {
-            x += element.offsetLeft;
-            y += element.offsetTop;
-            element = element.offsetParent;
+        // do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
         //} while (element);
         // Position blocklyDiv over blocklyArea.
         blocklyDiv.style.left = x + 'px';
