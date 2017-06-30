@@ -302,23 +302,26 @@
     <category id="catSystem" colour="240" custom="SYSTEM" name="System"></category>
 
 </xml>
+<div class="body">
+    <div class="toolbar">
+        <span>OC-Blockly |</span>
+        <button onclick="save()">Save</button>
+        <button onclick="loadFromCode()">Load</button>
+        <div class="right">
+            <span>created by <a href="https://bymarcin.com">marcin212</a></span>
+            <span> | version: alpha-0.5</span>
+        </div>
 
-<div class="toolbar">
-    <span>OC-Blockly |</span>
-    <button onclick="save()">Save</button>
-    <button onclick="loadFromCode()">Load</button>
-    <div class="right">
-        <span>created by <a href="https://bymarcin.com">marcin212</a></span>
-        <span> | version: alpha-0.5</span>
     </div>
-
-</div>
-<div class="content vertically_divided">
-    <div id="blocklyArea">
-        <div id="blocklyDiv"></div>
-    </div>
-    <div id="editorArea">
-        <div id="editorDiv"></div>
+    <div class="content">
+        <div class="vertically_divided">
+            <div id="blocklyArea">
+                <div id="blocklyDiv"></div>
+            </div>
+            <div id="editorArea">
+                <div id="editorDiv"></div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -339,11 +342,11 @@
         var element = blocklyArea;
         var x = 0;
         var y = 0;
-        do {
+       // do {
             x += element.offsetLeft;
             y += element.offsetTop;
             element = element.offsetParent;
-        } while (element);
+        //} while (element);
         // Position blocklyDiv over blocklyArea.
         blocklyDiv.style.left = x + 'px';
         blocklyDiv.style.top = y + 'px';

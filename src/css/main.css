@@ -1,5 +1,31 @@
-#blocklyDiv, #editorDiv, .content {
+html, body {
+    margin: 0;
+    padding: 0;
     height: 100%;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+#editorDiv{
+    height: 100%;
+}
+.content{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+
+.vertically_divided{
+    width: 100%;
+}
+
+#blocklyDiv, #editorDiv {
+    flex-grow: 1;
 }
 
 #blocklyDiv {
@@ -8,6 +34,7 @@
 
 .toolbar {
     font-size: 20px;
+    padding: 5px;
 }
 
 .right {
