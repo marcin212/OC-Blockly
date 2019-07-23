@@ -79,3 +79,55 @@ zetta.blockList.push('dataWaiting');
 zetta.blockAsText['dataWaiting'] = '<xml><block type="dataWaiting"></block></xml>';
 
 //END DATA WAITING
+
+//READ NFC
+
+Blockly.Blocks['readData'] = {
+    init: function () {
+        this.setColour(125);
+        this.appendDummyInput()
+            .appendField('When receive NFC Data');
+        this.appendStatementInput('DO')
+            .appendField('then');
+        this.setTooltip('Returns true if there is data waiting to be written in the buffer. After a successful write, the buffer is automatically cleared.');
+        this.setHelpUrl('https://zi.bymarcin.com/NFC/NFC-Programmer.md');
+    }
+};
+
+Blockly.Lua['readData'] = function (block) {
+    let statement = Blockly.Lua.statementToCode(block, 'DO');
+    return ['event.listen("nfc_data", function(nfc_data, nfcreader_address, player_name, message_from_nfc) \n' + statement + ' end)', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('readData');
+zetta.blockAsText['readData'] = '<xml><block type="readData"></block></xml>';
+
+//END READ NFC
+
+//NFC VARIABLES
+
+Blockly.Blocks['NFC_Variables'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('NFC_data variable: ')
+            .appendField(new Blockly.FieldDropdown([
+                    ['address', 'nfcreader_address'],
+                    ['player', 'player_name'],
+                    ['message', 'message_from_nfc']
+                ]),
+                'VAL');
+        this.setOutput(true, 'String');
+        this.setColour(125);
+        this.setTooltip('Register event listener for \'nfc_data\'');
+        this.setHelpUrl('https://zi.bymarcin.com/NFC/NFC-Programmer.md');
+    }
+};
+
+Blockly.Lua['NFC_Variables'] = function (block) {
+    return [block.getFieldValue('VAL'), Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('NFC_Variables');
+zetta.blockAsText['NFC_Variables'] = '<xml><block type="NFC_Variables"></block></xml>';
+
+//END NFC VARIABLES
