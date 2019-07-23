@@ -19,6 +19,7 @@
     <script src="js/system-blocks.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/time-blocks.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/redstone-blocks.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/zetta-blocks.js" type="text/javascript" charset="utf-8"></script>
 
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -304,6 +305,7 @@
     <category id="catSystem" colour="240" custom="SYSTEM" name="System"></category>
     <category id="catTime" colour="240" custom="TIME" name="Time"></category>
     <category id="catRedstone" colour="240" custom="REDSTONE" name="Redstone"></category>
+    <category id="catZetta" colour="240" custom="ZETTA" name="Zetta Industries"></category>
 
 </xml>
 <div class="body">
@@ -428,6 +430,7 @@
     workspace.registerToolboxCategoryCallback('SYSTEM', system.toolboxCategory);
     workspace.registerToolboxCategoryCallback('TIME', time.toolboxCategory);
     workspace.registerToolboxCategoryCallback('REDSTONE', redstone.toolboxCategory);
+    workspace.registerToolboxCategoryCallback('ZETTA', zetta.toolboxCategory);
     document.addEventListener("DOMContentLoaded", function (event) {
         if (window.location.hash != "" && window.location.hash != "#") {
             load();
