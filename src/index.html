@@ -17,6 +17,7 @@
     <script src="js/stack-blocks.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/geolyzer-block.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/system-blocks.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/time-blocks.js" type="text/javascript" charset="utf-8"></script>
 
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -300,6 +301,7 @@
     <category id="catRobotStack" colour="240" custom="ROBOT_STACK" name="ItemStack"></category>
     <category id="catGeolyzer" colour="240" custom="GEOLYZER" name="Geolyzer"></category>
     <category id="catSystem" colour="240" custom="SYSTEM" name="System"></category>
+    <category id="catTime" colour="240" custom="TIME" name="Time"></category>
 
 </xml>
 <div class="body">
@@ -422,6 +424,7 @@
     workspace.registerToolboxCategoryCallback('ROBOT_STACK', robot_stack.toolboxCategory);
     workspace.registerToolboxCategoryCallback('GEOLYZER', geolyzer.toolboxCategory);
     workspace.registerToolboxCategoryCallback('SYSTEM', system.toolboxCategory);
+    workspace.registerToolboxCategoryCallback('TIME', time.toolboxCategory);
     document.addEventListener("DOMContentLoaded", function (event) {
         if (window.location.hash != "" && window.location.hash != "#") {
             load();
