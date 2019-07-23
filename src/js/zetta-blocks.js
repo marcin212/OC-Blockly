@@ -118,7 +118,6 @@ Blockly.Blocks['NFC_Variables'] = {
                 'VAL');
         this.setOutput(true, 'String');
         this.setColour(125);
-        this.setTooltip('Register event listener for \'nfc_data\'');
         this.setHelpUrl('https://zi.bymarcin.com/NFC/NFC-Programmer.md');
     }
 };
@@ -131,3 +130,218 @@ zetta.blockList.push('NFC_Variables');
 zetta.blockAsText['NFC_Variables'] = '<xml><block type="NFC_Variables"></block></xml>';
 
 //END NFC VARIABLES
+
+//----------------BIG BATTERY-------------------------------------------------------------------------------------------
+
+//ENERGY STORED
+
+Blockly.Blocks['batteryEnergyStored'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('battery energy stored');
+        this.setOutput(true, 'Number');
+        this.setColour(125);
+        this.setTooltip('Get stored energy');
+    }
+};
+
+Blockly.Lua['batteryEnergyStored'] = function (block) {
+    return ['component.big_battery.getEnergyStored()', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('batteryEnergyStored');
+zetta.blockAsText['batteryEnergyStored'] = '<xml><block type="batteryEnergyStored"></block></xml>';
+
+//END ENERGY STORED
+
+//MAX ENERGY STORED
+
+Blockly.Blocks['batteryMaxEnergyStored'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('battery max storage');
+        this.setOutput(true, 'Number');
+        this.setColour(125);
+        this.setTooltip('Get battery capacity');
+    }
+};
+
+Blockly.Lua['batteryMaxEnergyStored'] = function (block) {
+    return ['component.big_battery.getMaxEnergyStored()', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('batteryMaxEnergyStored');
+zetta.blockAsText['batteryMaxEnergyStored'] = '<xml><block type="batteryMaxEnergyStored"></block></xml>';
+
+//END MAX ENERGY STORED
+
+//ENERGY LAST TICK
+
+Blockly.Blocks['energyLastTick'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('energy balance last tick');
+        this.setOutput(true, 'Number');
+        this.setColour(125);
+    }
+};
+
+Blockly.Lua['energyLastTick'] = function (block) {
+    return ['component.big_battery.getEnergyBalanceLastTick()', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('energyLastTick');
+zetta.blockAsText['energyLastTick'] = '<xml><block type="energyLastTick"></block></xml>';
+
+//END ENERGY LAST TICK
+
+//---------------SMARTCARD----------------------------------------------------------------------------------------------
+
+//EVENT smartcard_in
+
+Blockly.Blocks['smartcardIn'] = {
+    init: function () {
+        this.setColour(125);
+        this.appendDummyInput()
+            .appendField('When smartcard inserted');
+        this.appendStatementInput('DO')
+            .appendField('then');
+        this.setTooltip('Runs on event smartcard_in');
+        this.setHelpUrl('https://zi.bymarcin.com/');
+    }
+};
+
+Blockly.Lua['smartcardIn'] = function (block) {
+    let statement = Blockly.Lua.statementToCode(block, 'DO');
+    return ['event.listen("smartcard_in", function(_, address, player) \n' + statement + ' end)', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('smartcardIn');
+zetta.blockAsText['smartcardIn'] = '<xml><block type="smartcardIn"></block></xml>';
+
+//END EVENT smartcard_in
+
+//EVENT smartcard_out
+
+Blockly.Blocks['smartcardOut'] = {
+    init: function () {
+        this.setColour(125);
+        this.appendDummyInput()
+            .appendField('When smartcard removed');
+        this.appendStatementInput('DO')
+            .appendField('then');
+        this.setTooltip('Runs on event smartcard_out');
+        this.setHelpUrl('https://zi.bymarcin.com/');
+    }
+};
+
+Blockly.Lua['smartcardOut'] = function (block) {
+    let statement = Blockly.Lua.statementToCode(block, 'DO');
+    return ['event.listen("smartcard_out", function(_, address, player) \n' + statement + ' end)', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('smartcardOut');
+zetta.blockAsText['smartcardOut'] = '<xml><block type="smartcardOut"></block></xml>';
+
+//END EVENT smartcard_out
+
+//SMARTCARD VARIABLES
+
+Blockly.Blocks['smartcard_Variables'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('smartcard variable: ')
+            .appendField(new Blockly.FieldDropdown([
+                    ['address', 'address'],
+                    ['player', 'player']
+                ]),
+                'VAL');
+        this.setOutput(true, 'String');
+        this.setColour(125);
+        this.setTooltip('Variables for use with smartcard_in and smartcard_out.');
+        this.setHelpUrl('https://zi.bymarcin.com/');
+    }
+};
+
+Blockly.Lua['smartcard_Variables'] = function (block) {
+    return [block.getFieldValue('VAL'), Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('smartcard_Variables');
+zetta.blockAsText['smartcard_Variables'] = '<xml><block type="smartcard_Variables"></block></xml>';
+
+//END SMARTCARD VARIABLES
+
+//SMARTCARD ECDH
+
+Blockly.Blocks['smartcardECDH'] = {
+    init: function () {
+        this.setColour(125);
+        this.setOutput(true, 'String');
+        this.appendValueInput('PUBKEY')
+            .appendField('generate shared key (ecdh) ');
+        this.setInputsInline(true);
+        this.setTooltip('Generates a Diffie-Hellman shared key using private key from smartcard and the provided public key.');
+        this.setHelpUrl('https://zi.bymarcin.com/');
+    }
+};
+
+Blockly.Lua['smartcardECDH'] = function (block) {
+    let pubkey = Blockly.Lua.valueToCode(block, 'PUBKEY', Blockly.Lua.ORDER_NONE);
+    return ['component.smartcard_terminal.ecdh(' + pubkey + ')', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('smartcardECDH');
+zetta.blockAsText['smartcardECDH'] = '<xml><block type="smartcardECDH"></block></xml>';
+
+//END SMARTCARD ECDH
+
+//HAS CARD
+
+Blockly.Blocks['hasCard'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('has card?');
+        this.setOutput(true, 'Boolean');
+        this.setColour(125);
+        this.setTooltip('Returns true if card is present.');
+        this.setHelpUrl('https://zi.bymarcin.com/');
+    }
+};
+
+Blockly.Lua['hasCard'] = function (block) {
+    return ['component.smartcard_terminal.hasCard()', Blockly.Lua.ORDER_MEMBER];
+};
+
+zetta.blockList.push('hasCard');
+zetta.blockAsText['hasCard'] = '<xml><block type="hasCard"></block></xml>';
+
+//END HAS CARD
+
+//PROTECT
+
+Blockly.Blocks['protectCard'] = {
+    init: function () {
+        this.setColour(125);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.appendDummyInput()
+            .appendField('Protect card');
+        this.setInputsInline(true);
+        this.setTooltip('Restricts card access to the player that inserted it.');
+        this.setHelpUrl('https://zi.bymarcin.com/');
+    }
+};
+
+Blockly.Lua['protectCard'] = function (block) {
+    return 'component.smartcard_terminal.protect()\n';
+};
+
+zetta.blockList.push('protectCard');
+zetta.blockAsText['protectCard'] = '<xml><block type="protectCard"></block></xml>';
+
+//END PROTECT
+
+//---------------RF METER-----------------------------------------------------------------------------------------------
+
+//TODO: RF Meter

@@ -385,15 +385,16 @@
     function save() {
         showLoading(true);
         try {
-            var xml = Blockly.Xml.workspaceToDom(workspace);
-            var xml_text = Blockly.Xml.domToText(xml);
-            var compressed = LZString.compressToBase64(xml_text);
-            var id = gist.add(compressed);
+            const xml = Blockly.Xml.workspaceToDom(workspace);
+            const xml_text = Blockly.Xml.domToText(xml);
+            const compressed = LZString.compressToBase64(xml_text);
+            const id = gist.add(compressed);
             alert("saved as:" + id);
             window.location.hash = '#' + id;
         }
         catch (err) {
-            alert("Error during saving data.")
+            alert("Error during saving data.");
+            console.error(err);
         }
         showLoading(false);
     }
@@ -438,6 +439,7 @@
         }
     });
 
+    Blockly.BlockSvg.START_HAT = true;
 </script>
 
 </body>
