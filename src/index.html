@@ -17,6 +17,9 @@
     <script src="js/stack-blocks.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/geolyzer-block.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/system-blocks.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/time-blocks.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/redstone-blocks.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/zetta-blocks.js" type="text/javascript" charset="utf-8"></script>
 
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -300,6 +303,9 @@
     <category id="catRobotStack" colour="240" custom="ROBOT_STACK" name="ItemStack"></category>
     <category id="catGeolyzer" colour="240" custom="GEOLYZER" name="Geolyzer"></category>
     <category id="catSystem" colour="240" custom="SYSTEM" name="System"></category>
+    <category id="catTime" colour="240" custom="TIME" name="Time"></category>
+    <category id="catRedstone" colour="240" custom="REDSTONE" name="Redstone"></category>
+    <category id="catZetta" colour="240" custom="ZETTA" name="Zetta Industries"></category>
 
 </xml>
 <div class="body">
@@ -363,6 +369,7 @@
         'local computer = require("computer")\n' +
         'local sides = require("sides")\n' +
         'local component = require("component")\n' +
+        'local event = require("event")\n' +
         '\n';
 
     function showLoading(bool) {
@@ -378,15 +385,16 @@
     function save() {
         showLoading(true);
         try {
-            var xml = Blockly.Xml.workspaceToDom(workspace);
-            var xml_text = Blockly.Xml.domToText(xml);
-            var compressed = LZString.compressToBase64(xml_text);
-            var id = gist.add(compressed);
+            const xml = Blockly.Xml.workspaceToDom(workspace);
+            const xml_text = Blockly.Xml.domToText(xml);
+            const compressed = LZString.compressToBase64(xml_text);
+            const id = gist.add(compressed);
             alert("saved as:" + id);
             window.location.hash = '#' + id;
         }
         catch (err) {
-            alert("Error during saving data.")
+            alert("Error during saving data.");
+            console.error(err);
         }
         showLoading(false);
     }
@@ -422,12 +430,16 @@
     workspace.registerToolboxCategoryCallback('ROBOT_STACK', robot_stack.toolboxCategory);
     workspace.registerToolboxCategoryCallback('GEOLYZER', geolyzer.toolboxCategory);
     workspace.registerToolboxCategoryCallback('SYSTEM', system.toolboxCategory);
+    workspace.registerToolboxCategoryCallback('TIME', time.toolboxCategory);
+    workspace.registerToolboxCategoryCallback('REDSTONE', redstone.toolboxCategory);
+    workspace.registerToolboxCategoryCallback('ZETTA', zetta.toolboxCategory);
     document.addEventListener("DOMContentLoaded", function (event) {
         if (window.location.hash != "" && window.location.hash != "#") {
             load();
         }
     });
 
+    Blockly.BlockSvg.START_HAT = true;
 </script>
 
 </body>

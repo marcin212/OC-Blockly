@@ -16,7 +16,6 @@ system.toolboxCategory = function (workspace) {
 
 //SLEEP
 
-
 Blockly.Blocks['sleep'] = {
     init: function () {
         this.appendValueInput('TIME').setCheck('Number').appendField('sleep');
@@ -35,3 +34,25 @@ system.blockList.push('sleep');
 system.blockAsText['sleep'] = '<xml><block type="sleep"></block></xml>';
 
 //END SLEEP
+
+//IGNORE OUTPUT
+
+Blockly.Blocks['ignoreOutput'] = {
+    init: function () {
+        this.setColour(125);
+        this.appendValueInput('RESULT')
+            .appendField('ignore output');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+Blockly.Lua['ignoreOutput'] = function (block) {
+    let result = Blockly.Lua.valueToCode(block, 'RESULT', Blockly.Lua.ORDER_NONE);
+    return result + '\n';
+};
+
+system.blockList.push('ignoreOutput');
+system.blockAsText['ignoreOutput'] = '<xml><block type="ignoreOutput"></block></xml>';
+
+//END IGNORE OUTPUT
